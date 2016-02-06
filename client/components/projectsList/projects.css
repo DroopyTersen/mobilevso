@@ -1,0 +1,13 @@
+.collection.with-header {
+	margin: 0;
+}
+.collection.with-header .collection-header {
+	padding: 6px 20px 3px;
+	background: #26a69a;
+}
+.collection.with-header .collection-header span {
+	font-size: 1.15rem;
+}
+.collection .collection-item.avatar {
+	min-height: 65px;
+}

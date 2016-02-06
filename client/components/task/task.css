@@ -1,0 +1,78 @@
+.task-header {
+	padding: 7px 10px;
+	position: relative;
+}
+.task-header.active {
+	display: none;
+}
+.task-header .task-title,
+.task-header .task-subtitle {
+	line-height: 1.5rem;
+}
+.task-header i {
+    color: rgba(38, 166, 154, 0.51);
+    /* opacity: .25; */
+    font-size: 1.3em;
+    position: relative;
+    left: -8px;
+}
+.task-header i.done {
+    color: rgba(38, 166, 154, 0.51);
+    /* opacity: .25; */
+    font-size: 2.2em;
+    position: relative;
+    left: 0px;
+}
+.task-header .remaining {
+    position: absolute;
+    font-weight: 400;
+    width: 2rem;
+    /* text-align: center; */
+    color: #26a69a;
+    font-size: 1.5em;
+    top: 8px;
+    left: 25px;
+}
+.task-header .task-title {
+	font-size: 1.1em;
+	color:#333;
+	/*color: #26a69a;*/
+}
+.task-header .task-subtitle {
+	color:#777;
+	font-weight: 300;
+}
+.task-body {
+	padding: 5px 10px
+}
+.task-body .task-title {
+	font-size: 1.2em;
+}
+.task-body .task-path {
+	color:#666;
+	letter-spacing: -0.05em
+}
+.task-body .task-iteration {
+	font-style: italic;
+	margin: 10px -12px;
+}
+.task-body .task-iteration i {
+	font-size:2em;
+	position: relative;
+	top: -3px;
+}
+.task-info .remaining{
+	margin-top:-20px;
+}
+.task-info input {
+	font-size: 2em;
+	text-align: center;
+	/*color:#EE6E73;*/
+}
+.task-info .col {
+	padding:0;
+}
+.task-buttons.row {
+	margin:6px 0 0;
+
+}

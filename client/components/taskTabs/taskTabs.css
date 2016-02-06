@@ -1,0 +1,17 @@
+.tabs .tab a:hover,
+.tabs .tab a.active {
+	color:#444
+}
+div.card-panel {
+	margin: 0 0 5px;
+	position: relative;
+}
+.mytasks nav {
+	box-shadow: none;
+}
+ul.tabs, ul.tabs tab {
+	height: 40px
+}
+.tabs .tab {
+	line-height: 43px;
+}

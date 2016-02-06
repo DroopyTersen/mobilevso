@@ -1,0 +1,8 @@
+form, input, button, 
+.input-field input {
+	font-size: 1.1rem;
+}
+.input-field label,
+.input-field label.active {
+	font-size: 1.0rem
+}

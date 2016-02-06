@@ -1,0 +1,36 @@
+.nav-wrapper {
+	text-align: center;
+}
+.logo {
+	display: inline-block;
+	position: relative;
+	top: -3px;
+	/*width:100%;*/
+	font-size:1.3em;
+	font-weight: 300;
+}
+#logo-mobile {
+	position: relative;
+	left: 4px;
+}
+
+#logo-vso {
+/*	position: relative;
+	left: 20px;*/
+}
+#logo-icon {
+	position: relative;
+	left:6px;
+	top:6px;
+	font-size: 1.3em;
+	display: inline-block;
+	transform: rotate(-199deg);
+}
+
+ul #top-right-menu {
+	width:200px !important;
+	right: 10px;
+	position: relative;
+	top:45px !important;
+	z-index: 9999 !important
+}

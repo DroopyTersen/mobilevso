@@ -1,0 +1,38 @@
+.fixed-action-btn.click-to-toggle {
+	z-index: 99;
+}
+.fab-child .floating-search {
+    position: relative;
+    bottom: 10px;
+    right: -15px;
+}
+
+.fab-child .floating-search input {
+	width: 200px;
+	margin: 0;
+	padding:0 5px;
+	font-size:1.2em;
+	border:none;
+	background: #fff;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+	50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#search-btn.has-value {
+  animation-name: pulse;
+  animation-duration: 1.25s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+

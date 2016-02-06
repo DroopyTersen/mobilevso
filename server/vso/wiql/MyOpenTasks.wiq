@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkItemQuery Version="1">
+	<TeamFoundationServer>https://skyline.visualstudio.com/defaultcollection</TeamFoundationServer>
+	<TeamProject>Skyline-Portals</TeamProject>
+	<Wiql>SELECT [System.Id], [System.NodeName], [System.Title], [Microsoft.VSTS.Scheduling.RemainingWork], [System.State], [System.IterationPath], [Microsoft.VSTS.Common.Priority] FROM WorkItemLinks WHERE (Source.[System.TeamProject] = @project and Source.[System.State] &lt;&gt; 'Done' and Source.[System.State] &lt;&gt; 'Removed') and ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') and (Target.[System.TeamProject] = @project and Target.[System.WorkItemType] = 'Task' and Target.[System.AssignedTo] = @me and Target.[System.State] &lt;&gt; 'Done' and Target.[System.State] &lt;&gt; 'Removed') ORDER BY [Microsoft.VSTS.Common.Priority], [System.State] mode(Recursive,ReturnMatchingChildren)</Wiql>
+</WorkItemQuery>

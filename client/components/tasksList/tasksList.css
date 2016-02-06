@@ -1,0 +1,9 @@
+.collapsible.popout>li {
+	margin: 0 3px;
+}
+.collapsible.popout>li.active {
+	margin:10px 0;
+}
+.row .col.s12 {
+	padding:0 0.5rem;
+}
