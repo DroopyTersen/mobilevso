@@ -47,13 +47,19 @@ var createRoutes = function(app, passport) {
     });
 
     app.get("/api/tasks/:id/setState/:state", authorize, (req, res) => {
-        api.setTaskState(req.user.authHash, req.params.id, req.params.state)
+        api.setTaskState(req.user, req.params.id, req.params.state)
+            .then(apiRes => res.send(apiRes))
+            .catch(err => res.send(err))
+    });
+
+    app.get("/api/tasks/:id/setRemaining/:remaining", authorize, (req, res) => {
+        api.setTaskRemaining(req.user, req.params.id, req.params.remaining)
             .then(apiRes => res.send(apiRes))
             .catch(err => res.send(err))
     });
 
     app.get("/api/tasks/:id/setIteration/:project", authorize, (req, res) => {
-        api.setTaskIteration(req.user.authHash, req.params.id, req.params.project)
+        api.setTaskIteration(req.user, req.params.id, req.params.project)
             .then(apiRes => res.send(apiRes))
             .catch(err => res.send(err))
     });

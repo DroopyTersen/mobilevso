@@ -40,7 +40,6 @@ export default class LoginForm extends React.Component {
             	<form action="/login" method="post">
 		        <div className="card">
 		            <div className="card-content">
-                    		<div className='section'></div>
 		            		<div className='row'>
 	            				<TextBox
 	            					width="s12"

@@ -1,5 +1,7 @@
 import React from 'react';
 require("./header.css")
+import { getSettings } from '../../data/settings'
+
 export default class Header extends React.Component {
 
 	constructor(props) {
@@ -10,7 +12,17 @@ export default class Header extends React.Component {
 		setTimeout(() => $(".button-collapse").sideNav(), 10);
 	}
 
+	renderCurrentProject() {
+		var settings = getSettings();
+		if (settings.project && settings.project.name) {
+			return (
+				<li className='project truncate'>{settings.project.name}</li>
+			);
+		}
+		return "";
+	}
 	render() {
+
 		return ( 
 		<div className='navbar-fixed'>
 
@@ -62,6 +74,7 @@ export default class Header extends React.Component {
 					</ul>
 		        </div>
 				<ul id='top-right-menu' className='dropdown-content z-depth-2'>
+					{this.renderCurrentProject()}
 					<li>
 						<a href="/projects">
 		            		<i className="material-icons right">turned_in</i>

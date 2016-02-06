@@ -8,6 +8,7 @@ export default class ProjectsList extends React.Component {
 	constructor(props) {
     	super(props);
     	this.selectProject = this.selectProject.bind(this);
+    	this.scrolled = false;
 	}
 
 	selectProject(e) {
@@ -19,6 +20,15 @@ export default class ProjectsList extends React.Component {
 		}
 	}
 
+	scrollToSelected() {
+		if (!this.scrolled && this.props.currentProject && this.props.currentProject.id) {
+			setTimeout(() => {
+				var target = $("#" + this.props.currentProject.id).offset().top - 200;
+				$("body").scrollTop(target)
+				this.scrolled = true;
+			}, 1)
+		}
+	}
 	render() {
 		var self = this;
 		var getIcon = function(project) {
@@ -26,10 +36,10 @@ export default class ProjectsList extends React.Component {
 							? <i className="material-icons circle green">turned_in</i>
 							: <i className="material-icons circle">turned_in_not</i>
 		};
-
+		this.scrollToSelected();
 		var projectsMarkup = this.props.projects.map(project => {
 			return (
-				<li className='collection-item avatar' data-id={project.id} data-name={project.name} onClick={this.selectProject}>
+				<li className='collection-item avatar' id={project.id} data-id={project.id} data-name={project.name} onClick={this.selectProject}>
 					{getIcon(project)}
 					<span className='title'>{project.name}</span>
 					<p>{project.description}</p>

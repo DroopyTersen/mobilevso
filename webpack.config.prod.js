@@ -12,7 +12,8 @@ module.exports = {
   },
   externals: {
     "react": "React",
-    "react-dom": "ReactDOM"
+    "react-dom": "ReactDOM",
+    "lodash": "_"
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -31,7 +32,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'src')
+      include: path.join(__dirname, 'client')
     }, {
       test: /\.css$/,
       loader: "style-loader!css-loader"

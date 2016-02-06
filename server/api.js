@@ -3,14 +3,19 @@ var vsoFactory = require('./vso');
 
 var connectToVso = user => vsoFactory.create(user.authHash, user.host)
 
-api.setTaskIteration = function(authHash, id, project) {
-	var vso = vsoFactory.create(authHash);
+api.setTaskIteration = function(user, id, project) {
+	var vso = connectToVso(user);
 	return vso.tasks(id).setIteration(project)
 };
 
-api.setTaskState = function(authHash, id, state) {
-	var vso = vsoFactory.create(authHash);
+api.setTaskState = function(user, id, state) {
+	var vso = connectToVso(user);
 	return vso.tasks(id).setState(state)
+}
+
+api.setTaskRemaining = function(user, id, remaining) {
+	var vso = connectToVso(user);
+	return vso.tasks(id).setRemaining(remaining)
 }
 
 api.getMyTasks = function(user, project) {
@@ -24,7 +29,7 @@ api.getMyRecentDone = function(user, project) {
 	var vso = connectToVso(user)
 	var project = vso.projects(decodeURIComponent(project))
 	
-	return project.myRecentDone();
+	return project.myRecentDone().then(tasks => tasks.length > 20 ? tasks.slice(0,19) : tasks);
 }; 
 
 api.getProjects = (user) => connectToVso(user).projects()

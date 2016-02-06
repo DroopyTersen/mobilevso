@@ -1,23 +1,37 @@
-var path = require('path');
-var express = require('express');
-var config = require('../webpack.config.prod');
-var webpack = require('webpack');
-var router = require("./router");
+var path 			= require('path');
+var express 		= require('express');
+var webpack 		= require('webpack');
+var cookieParser 	= require('cookie-parser');
+var bodyParser   	= require('body-parser');
+var session      	= require('express-session');
+var passport 		= require('passport');
 
-var app = express();
-var compiler = webpack(config);
+var config 			= require('../webpack.config.prod');
+var createRoutes 	= require("./router").createRoutes;
+var setupPassport 	= require("./passport").setupPassport;
+
+var app 		= express();
+var compiler 	= webpack(config);
+var port 		= process.env.PORT || 3000;
+var host 		= process.env.IP;
 
 
+//AUTHENTICATION 
+setupPassport(passport);
+app.use(bodyParser()); 
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(session({ secret: 'shhhhhhh' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+createRoutes(app, passport);
 app.use('/static', express.static('dist'));
-app.use('/static', express.static('css'));
 
-router.setup(app);
 
-app.listen(3000, 'localhost', function(err) {
+app.listen(port, host, function(err) {
   if (err) {
     console.log(err);
     return;
   }
-
   console.log('Listening at http://localhost:3000');
 });

@@ -42,7 +42,8 @@ export default class TextBox extends React.Component {
 					type={ this.props.type || "text" }
 					defaultValue= { this.props.defaultValue || "" }
 					id={this.props.name}
-					name={this.props.name} 
+					name={this.props.name}
+					disabled={this.props.disabled || false}
 				/>
 				<label for={this.props.name} className={active}>
 					{this.props.label}

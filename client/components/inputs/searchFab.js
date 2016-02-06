@@ -8,7 +8,7 @@ export default class SearchFab extends React.Component {
 	}
 
 	handleChange() {
-		if (this.props.handleChange) {
+		if (this.props && this.props.handleChange) {
 			this.props.handleChange($("#search").val())
 		}
 	}

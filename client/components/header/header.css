@@ -34,3 +34,12 @@ ul #top-right-menu {
 	top:45px !important;
 	z-index: 9999 !important
 }
+ul #top-right-menu .project{
+    font-weight: 300;
+    font-size: 1.2em;
+    margin: 0px 10px 0 15px;
+    min-height: 30px;
+    position: relative;
+    top: 15px;
+    width: 180px;
+}

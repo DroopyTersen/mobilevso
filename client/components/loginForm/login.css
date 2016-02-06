@@ -6,3 +6,9 @@ form, input, button,
 .input-field label.active {
 	font-size: 1.0rem
 }
+.card-content .row:first-child {
+	margin-top: 10px;
+}
+.card-content .row {
+	margin-bottom: 15px;
+}

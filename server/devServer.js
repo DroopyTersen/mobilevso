@@ -35,7 +35,6 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 
 createRoutes(app, passport);
-app.use('/static', express.static('css'));
 
 
 app.listen(port, host, function(err) {

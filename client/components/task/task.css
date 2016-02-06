@@ -29,7 +29,7 @@
     width: 2rem;
     /* text-align: center; */
     color: #26a69a;
-    font-size: 1.5em;
+    font-size: 1.1em;
     top: 8px;
     left: 25px;
 }
@@ -74,5 +74,16 @@
 }
 .task-buttons.row {
 	margin:6px 0 0;
-
+}
+i.waves-effect {
+	overflow: visible;
+}
+.modal-content h5 {
+    font-size: 1.2em;
+}
+.modal .modal-footer .btn-flat {
+	float:none;
+}
+.modal .modal-content {
+	padding-bottom: 0px;
 }

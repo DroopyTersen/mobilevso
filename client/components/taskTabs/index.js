@@ -9,23 +9,23 @@ export default class TaskTabs extends React.Component {
 			<div className="col s12 card-panel">
 				<ul className="tabs">
 					<li className="tab col s3">
-						<a href="#todoTasks">To Do</a>
+						<a href="#todo-tasks">To Do</a>
 					</li>
 					<li className="tab col s3">
-						<a className='active' href="#inProgressTasks">In Progress</a>
+						<a href="#in-progress-tasks">In Progress</a>
 					</li>
 					<li className="tab col s3">
-						<a href="#doneTasks">Done</a>
+						<a href="#done-tasks">Done</a>
 					</li>
 				</ul>
 			</div>
-			<div id="todoTasks" className="col s12">
+			<div id="todo-tasks" className="col s12">
 				<TasksList tasks={this.props.tasks["To Do"]} />
 			</div>
-			<div id="inProgressTasks" className="col s12">
+			<div id="in-progress-tasks" className="col s12">
 				<TasksList tasks={this.props.tasks["In Progress"]} />
 			</div>
-			<div id="doneTasks" className="col s12">
+			<div id="done-tasks" className="col s12">
 				<TasksList tasks={this.props.tasks["Done"]} />
 			</div>
 		</div>

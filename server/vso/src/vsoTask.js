@@ -31,6 +31,15 @@ VsoTask.prototype.setIteration = function(project) {
 		.catch(err => {
 			console.log(err);	
 		});		
+}
+;
+VsoTask.prototype.setRemaining = function(remaining) {
+	var updates = [{
+		"op": "add",
+		"path": "/fields/Microsoft.VSTS.Scheduling.RemainingWork",
+		"value": remaining
+	}];
+	return this.update(updates);
 };
 
 VsoTask.prototype.setState = function(state) {

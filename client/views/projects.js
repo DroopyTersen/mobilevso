@@ -6,7 +6,7 @@ import { getSettings, updateProject } from '../data/settings';
 import Header from '../components/header'
 import ProjectsList from '../components/projectsList'
 import SearchFab from '../components/inputs/searchFab'
-
+import { loading } from '../utils'
 class ProjectsPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -21,8 +21,11 @@ class ProjectsPage extends React.Component {
 	}
 
 	updateProject(newProject) {
+		loading.start();
 		var settings = updateProject(newProject);
 		this.setState({ currentProject: settings.project });
+		setTimeout(() => window.location.href = "/mytasks", 500)
+		
 	}
 
 	search(value) {
