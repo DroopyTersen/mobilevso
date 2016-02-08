@@ -13,8 +13,10 @@ var createRoutes = function(app, passport) {
         failureRedirect: "/login?failed=true"
     };
 
+    app.get("/loginhelp", (req, res) => res.send(getMarkup("loginhelp")));
+
     // AUTHENTICATION
-	app.get("/login", (req, res) => res.send(getMarkup("login")));
+    app.get("/login", (req, res) => res.send(getMarkup("login")));
     app.post('/login', passport.authenticate('local', passportOptions));
     app.get("/signout", (req, res) => {
         req.logout();

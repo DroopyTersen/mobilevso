@@ -67,16 +67,17 @@ export default class LoginForm extends React.Component {
 	            					selectOnFocus={true}
 		            				icon='https' />
 		            		</div>
-	            			<div className='center-align'>
-				            	<a href='https://www.visualstudio.com/en-us/integrate/get-started/auth/overview' target="_blank">
-				            		What the heck do I log in with?!
-				            	</a>
-			            	</div>
+
 		            </div>
 		            <div className='card-action center-align'>
 						<button type='submit' className="z-depth-0 waves-effect waves-light btn-large">
 							Login
 						</button>
+            			<div className='center-align help' >
+			            	<a href='/loginhelp'>
+			            		What the heck do I log in with?!
+			            	</a>
+		            	</div>
 		            </div>
 		        </div>
             	</form>

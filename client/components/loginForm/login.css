@@ -12,3 +12,17 @@ form, input, button,
 .card-content .row {
 	margin-bottom: 15px;
 }
+.card .card-content {
+	padding-bottom: 0;
+}
+.card .card-action {
+	border-top: none;
+	padding-top: 0;
+}
+.card .card-action .help {
+	margin-top:30px;
+}
+.card .card-action .help a{
+	text-transform: inherit !important;
+	margin: 0 auto !important;
+}

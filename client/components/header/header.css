@@ -43,3 +43,13 @@ ul #top-right-menu .project{
     top: 15px;
     width: 180px;
 }
+
+.side-nav li.logo {
+    font-size: 1.5em;
+    line-height: 30px;
+    position: relative;
+    top: 5px;
+}
+.side-nav a {
+	padding-left: 0;
+}

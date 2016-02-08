@@ -8,7 +8,6 @@ export default class Header extends React.Component {
     	super(props);
 	}
 	componentDidMount() {
-		console.log("HERE");
 		setTimeout(() => $(".button-collapse").sideNav(), 10);
 	}
 
@@ -29,18 +28,23 @@ export default class Header extends React.Component {
 		    <nav>
 
         		<ul id="slide-out" className="side-nav">
+        				<li className='logo'><span className='teal-text'>mobilevso.com</span></li>
+        				<li className='divider'></li>
     					<li>
     						<a href="/mytasks">
     							<i className="material-icons left">today</i>
     							My Tasks
 							</a>
 						</li>
+        				<li className='divider'></li>
     					<li>
     						<a href="/mytasks">
     							<i className="material-icons left">perm_contact_calendar</i>
     							Check on a teammate
 							</a>
 						</li>
+        				<li className='divider'></li>
+
 				</ul>
 	        	<div className="nav-wrapper">
 
