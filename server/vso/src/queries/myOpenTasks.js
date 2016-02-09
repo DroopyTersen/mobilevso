@@ -19,7 +19,12 @@ WHERE
 	AND 
 	(
 		Target.[System.TeamProject] = @project 
-		AND Target.[System.WorkItemType] = 'Task' 
+		AND  
+		(
+			Target.[System.WorkItemType] = 'Task' 
+			OR
+			Target.[System.WorkItemType] = 'Bug' 
+		)
 		AND Target.[System.AssignedTo] = @me 
 		AND Target.[System.State] <> 'Done' 
 		AND Target.[System.State] <> 'Removed'

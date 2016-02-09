@@ -23,7 +23,7 @@ VsoProject.prototype.myOpenTasks = function() {
 	return this.query(queries.myOpenTasks)
 		.then(workItems => {
 			return _.chain(workItems)
-					.filter(item => item.workItemType === "Task")
+					.filter(item => item.workItemType === "Task" || item.workItemType === "Bug")
 					.groupBy("state")
 					.value();	
 		});

@@ -6,7 +6,7 @@ export default class TaskHeader extends React.Component {
 			return <i className="tiny material-icons done">done</i>
 		} else {
 			return (
-				<span className='icon'>
+				<span className={'icon ' + task.workItemType }>
 					<span className='remaining'>{task.remaining}</span>
 					<i className="tiny material-icons">schedule</i>
 				</span>

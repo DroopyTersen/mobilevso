@@ -23,7 +23,7 @@ export default class TaskBody extends React.Component {
 			.then(newTask => {
 				notify.success(`Success: Remaining hours changed to <b>${hours}</b>`)
 			})
-			.fail(handleError)
+			.fail(this.handleError)
 	}
 
 	setIteration() {
@@ -58,9 +58,10 @@ export default class TaskBody extends React.Component {
 	}
 	render() {
 		var task = this.props.task;
+		console.log(task.title + " " + task.remaining)
 		return (
 			<div className='collapsible-body task-body'>
-				<h5 className='teal-text task-title'>{task.title}</h5>
+				<h5 className={'task-title ' + task.workItemType}>{task.title}</h5>
 				<div className='divider' />
 				<div className='section task-path'>{task.path}</div>
 
@@ -75,7 +76,7 @@ export default class TaskBody extends React.Component {
 						<TextBox
 							width="s12"
 							icon='schedule'
-							defaultValue={task.remaining}
+							value={task.remaining}
 							label='Remaining hours'
 							name={'remaining-' + task.id}
 							type='number'

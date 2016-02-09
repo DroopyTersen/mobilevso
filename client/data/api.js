@@ -30,6 +30,7 @@ tasksApi.getMyTasks = (proj) => _getJSON("/api/myTasks?project=" + proj)
 tasksApi.getMyRecentDone = (proj) => $.getJSON("/api/myrecentdone?project=" + proj)
 
 tasksApi.setState = function(task, state) {
+	if (task.workItemType === "Bug" && state === "In Progress") state = "Committed";
 	return _getJSON(`/api/tasks/${task.id}/setState/${state}`, "SAVING")
 			.then(updatedTask => Object.assign({}, task, updatedTask));
 };

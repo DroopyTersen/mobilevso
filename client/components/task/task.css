@@ -9,6 +9,7 @@
 .task-header .task-subtitle {
 	line-height: 1.5rem;
 }
+
 .task-header i {
     color: rgba(38, 166, 154, 0.51);
     /* opacity: .25; */
@@ -33,10 +34,20 @@
     top: 8px;
     left: 25px;
 }
+.task-header .icon.Bug i,
+.task-header .icon.Bug .remaining {
+	color: #ee6e73 ;
+}
 .task-header .task-title {
 	font-size: 1.1em;
 	color:#333;
 	/*color: #26a69a;*/
+}
+.task-body .task-title.Task{
+	color: #009688;
+}
+.task-body .task-title.Bug{
+	color: #ee6e73;
 }
 .task-header .task-subtitle {
 	color:#777;
