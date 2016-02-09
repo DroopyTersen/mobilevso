@@ -1,6 +1,6 @@
 exports.getEntries = function (env) {
 	var entries = [
-		"login", "mytasks", "projects", "loginhelp", "iterationstats"
+		"login", "mytasks", "projects", "loginhelp", "iterationstats", "teammate", "help"
 	]
 
 	var entry = {};

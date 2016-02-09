@@ -14,6 +14,7 @@ var createRoutes = function(app, passport) {
     };
 
     app.get("/loginhelp", (req, res) => res.send(getMarkup("loginhelp")));
+    app.get("/help", (req, res) => res.send(getMarkup("help")));
 
     // AUTHENTICATION
     app.get("/login", (req, res) => res.send(getMarkup("login")));
@@ -28,6 +29,7 @@ var createRoutes = function(app, passport) {
     app.get("/mytasks", authorize, (req, res) => res.send(getMarkup("mytasks")));
     app.get("/projects", authorize, (req, res) => res.send(getMarkup("projects")));
     app.get("/iterationstats", authorize, (req, res) => res.send(getMarkup("iterationstats")));
+    app.get("/teammate", authorize, (req, res) => res.send(getMarkup("teammate")));
 
 
     // API
