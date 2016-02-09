@@ -9,9 +9,14 @@ var create = function(authHash, host) {
 	var vsoContext = {};
     var _baseUrl = `https://${host}/defaultcollection`;
 	
+    var getUrl = function(path) {
+        return path.indexOf("https://") === 0 ? path : _baseUrl + path;
+    }
 	// base api methods to manually hit any VSO endpoint
-	vsoContext.getJSON = (path) => http.get(_baseUrl + path, _authHash);
-	vsoContext.postJSON = (path, body) => http.post(_baseUrl + path, _authHash, body);
+	vsoContext.get = (path) => http.get(getUrl(path), _authHash, false);
+	vsoContext.getImage = (path,cb) => http.getImage(getUrl(path), _authHash, cb);
+	vsoContext.getJSON = (path) => http.get(getUrl(path), _authHash);
+	vsoContext.postJSON = (path, body) => http.post(getUrl(path), _authHash, body);
 	vsoContext.patchJSON = (path, body) => http.patch(_baseUrl + path, _authHash, body);
 	vsoContext.tasks = (id) => new VsoTask(vsoContext, id);
 

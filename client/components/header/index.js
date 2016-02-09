@@ -15,7 +15,7 @@ export default class Header extends React.Component {
 		var settings = getSettings();
 		if (settings.project && settings.project.name) {
 			return (
-				<li className='project truncate'>{settings.project.name}</li>
+				<li data-proj-id={settings.project.id} className='project truncate'>{settings.project.name}</li>
 			);
 		}
 		return "";
@@ -41,6 +41,13 @@ export default class Header extends React.Component {
     						<a href="/mytasks">
     							<i className="material-icons left">perm_contact_calendar</i>
     							Check on a teammate
+							</a>
+						</li>
+        				<li className='divider'></li>
+    					<li>
+    						<a href="/iterationstats">
+    							<i className="material-icons left">trending_down</i>
+    							Iteration Stats
 							</a>
 						</li>
         				<li className='divider'></li>

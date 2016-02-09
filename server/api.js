@@ -25,6 +25,12 @@ api.getMyTasks = function(user, project) {
 	return project.myOpenTasks();
 }; 
 
+api.getTeamMembers = function(user, proj) {
+   // return connectToVso(user).projects(proj).teamMembers();
+};
+api.getBurndown = function(user, proj, cb) {
+    return connectToVso(user).projects(proj).getBurndown(cb);
+};
 api.getMyRecentDone = function(user, project) {
 	var vso = connectToVso(user)
 	var project = vso.projects(decodeURIComponent(project))

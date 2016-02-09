@@ -3,11 +3,13 @@ var queries = require('./queries');
 var _ = require("lodash");
 var data = require('./data');
 
-var VsoProject = function(ctx, name) {
+var VsoProject = function(ctx, project) {
+    this.name = (typeof project === "string") ? project : project.name;
 	this._ctx = ctx;
-	this.name = name;
-	this.baseUrl = `/${name}/_apis`;
-	this.queryUrl = `/${name}/_apis/wit/wiql?api-version=1.0`
+    if (project.id) this.id = project.id;
+	this.idUrl = `/_apis/projects/${project.id}`;
+	this.id = project.id;
+	this.queryUrl = `/${this.name}/_apis/wit/wiql?api-version=1.0`
 };
 
 VsoProject.prototype.query = function(wiqlStr) {
@@ -29,6 +31,25 @@ VsoProject.prototype.myOpenTasks = function() {
 		});
 };
 
+VsoProject.prototype.teams = function() {
+    var url = this.idUrl + "/teams?$top=500";
+    console.log(url);
+    return this._ctx.getJSON(url).then(data => {
+        console.log(data);
+        data.value
+    });
+};
+
+VsoProject.prototype.getMainTeam = function() {
+    var url = this.idUrl + "/teams"
+    return this._ctx.getJSON(url).then(proj => proj.defaultTeam);
+}
+VsoProject.prototype.teamMembers = function() {
+   this.getMainTeam().then(team => {
+       var url = team.url + "/members?$top=1000"
+       return this._ctx.getJSON(url).then(data => data.value);
+   }) 
+}
 VsoProject.prototype.myRecentDone = function() {
 	return this.query(queries.myRecentDone)
 	.then(workItems => {
@@ -41,8 +62,17 @@ VsoProject.prototype.myRecentDone = function() {
 	});
 };
 
+VsoProject.prototype.getBurndown = function(cb) {
+	return this.currentIteration().then(iteration => {
+		var chartOptions= `chartOptions={"Width":600,"Height":400,"ShowDetails":true,"Title":"${iteration.name}"}`
+		var iterationPath = encodeURIComponent(iteration.path.replace(/\\\\/g, "\\"));
+		var url = `/${this.id}/_api/_teamChart/Burndown?${chartOptions}&counter=2&iterationPath=${iterationPath}`
+        return this._ctx.getImage(url, cb)
+	})
+};
+
 VsoProject.prototype.currentIteration = function() {
-	var url = this.baseUrl + "/work/teamsettings/iterations?$timeframe=current&api-version=v2.0";
+	var url = `/${this.name}/_apis/work/teamsettings/iterations?$timeframe=current&api-version=v2.0`;
 	return this._ctx.getJSON(url).then(data => data.value[0]);
 }
 

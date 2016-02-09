@@ -27,6 +27,7 @@ var createRoutes = function(app, passport) {
     app.get("/", authorize, (req, res) => res.send(getMarkup("mytasks")));
     app.get("/mytasks", authorize, (req, res) => res.send(getMarkup("mytasks")));
     app.get("/projects", authorize, (req, res) => res.send(getMarkup("projects")));
+    app.get("/iterationstats", authorize, (req, res) => res.send(getMarkup("iterationstats")));
 
 
     // API
@@ -65,6 +66,19 @@ var createRoutes = function(app, passport) {
             .then(apiRes => res.send(apiRes))
             .catch(err => res.send(err))
     });
+    
+    app.get("/api/teammembers", authorize, (req, res) => {
+        var id = decodeURIComponent(req.query.projectId);
+        var name = decodeURIComponent(req.query.projectName);
+        return api.getTeamMembers(req.user, { name, id });
+    })
+
+    app.get("/api/burndown", authorize, (req, res) => {
+        var id = decodeURIComponent(req.query.projectId);
+        var name = decodeURIComponent(req.query.projectName);
+        return api.getBurndown(req.user, { name, id }, data => res.send(data));
+    })
+    
 }
 
 exports.createRoutes = createRoutes;

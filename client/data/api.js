@@ -23,6 +23,9 @@ projectsApi.getAll = () => {
 		})
 }
 
+projectsApi.getTeammates = (proj) => {
+	return $.getJSON(`/api/teammates?projectId=${proj.id}&projectName=${proj.name}`)
+}
 
 var tasksApi = {};
 
