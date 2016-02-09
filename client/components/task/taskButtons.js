@@ -1,6 +1,7 @@
 import React from 'react';
 import { tasksApi } from '../../data/api';
 import { notify } from '../../utils'
+import ConfirmationModal from '../modals/confirmationModal'
 
 export default class TaskButtons extends React.Component {
 	getClasses(color) {
@@ -30,10 +31,15 @@ export default class TaskButtons extends React.Component {
 					Complete
 				</a>
 				<a 
-					onClick={() => this.setState("Removed", task)}
+					onClick={() => $("#remove-modal-" + task.id).openModal()}
 					className={"col s4 center-align " + this.getClasses("red")}>
 					Remove
 				</a>
+				<ConfirmationModal 
+					onConfirm={() => this.setState("Removed", task)} 
+					header="You sure?"
+					name={ 'remove-modal-' + task.id }
+				/>
 			</div>
 		);
 	}

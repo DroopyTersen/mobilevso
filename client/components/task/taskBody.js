@@ -21,6 +21,7 @@ export default class TaskBody extends React.Component {
 		} 
 		tasksApi.setRemaining(this.props.task, hours)
 			.then(newTask => {
+				$(document).trigger("refresh-task", newTask);
 				notify.success(`Success: Remaining hours changed to <b>${hours}</b>`)
 			})
 			.fail(this.handleError)
@@ -30,6 +31,7 @@ export default class TaskBody extends React.Component {
 		if (this.props.task.state === "Done") return false;
 		tasksApi.setIteration(this.props.task)
 			.then(newTask => {
+				//$(document).trigger("refresh-task", newTask);
 				$("#iteration-" + newTask.id).html(newTask.iteration);
 				notify.success(`Success: Moved task to current iteration`)
 			})
@@ -58,7 +60,6 @@ export default class TaskBody extends React.Component {
 	}
 	render() {
 		var task = this.props.task;
-		console.log(task.title + " " + task.remaining)
 		return (
 			<div className='collapsible-body task-body'>
 				<h5 className={'task-title ' + task.workItemType}>{task.title}</h5>
@@ -72,11 +73,11 @@ export default class TaskBody extends React.Component {
 						State:<b style={{"font-size": "1.3em"}}> {task.state}</b>
 					</span>
 
-					<span className='remaining col s6'>
+					<span className='remaining col s6' data-value={task.remaining}>
 						<TextBox
 							width="s12"
 							icon='schedule'
-							value={task.remaining}
+							defaultValue={task.remaining}
 							label='Remaining hours'
 							name={'remaining-' + task.id}
 							type='number'

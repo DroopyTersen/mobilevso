@@ -16,8 +16,26 @@ export function filterTasks(value, allTasks) {
 	}
 }
 
+export function refreshTask(newTask, allTasks) {
+	var tasks = Object.assign({}, allTasks);
+	var oldTaskIndex = -1;
+	// Find the old one the old one
+	// For each key (state) check if there is a matching task
+	for (var state of Object.keys(tasks)) {
+		oldTaskIndex = tasks[state].findIndex(t => t.id === newTask.id);
+		//if a task was found join its props with the new task and then remove it from that state's array
+		if (oldTaskIndex > -1) {
+			var oldTask = tasks[state][oldTaskIndex];
+			tasks[state][oldTaskIndex] = Object.assign({}, oldTask, newTask);
+			break;
+		}
+	}
+	return tasks;
+}
+
 export function switchState(newTask, allTasks) {
 	var tasks = Object.assign({}, allTasks);
+	console.log(newTask);
 	var oldTask = null;
 	// Remove the old one
 	// For each key (state) check if there is a matching task
@@ -30,7 +48,8 @@ export function switchState(newTask, allTasks) {
 		}
 	}
 	// insert it at top of the new state
-	tasks[newTask.state] = [newTask, ...tasks[newTask.state]];
-	//.unshift(task);
+	if (tasks[newTask.state]) {
+		tasks[newTask.state] = [newTask, ...tasks[newTask.state]];		
+	}
 	return tasks;
 }

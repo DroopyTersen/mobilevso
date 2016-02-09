@@ -6,7 +6,7 @@ import { tasksApi } from '../data/api'
 import Header from '../components/header'
 import TaskTabs from '../components/taskTabs'
 import SearchFab from '../components/inputs/searchFab'
-import { filterTasks, switchState } from '../data/dataProcessing'
+import { filterTasks, switchState, refreshTask } from '../data/dataProcessing'
 import { clone, notify } from '../utils'
 
 var defaultTasks = { "To Do": [], "In Progress": [], "Done": [] };
@@ -33,13 +33,29 @@ class MyTasksPage extends React.Component {
 		$(document).on("state-change", this.handleStateChange.bind(this));
 	}
 
-	handleStateChange(e, updatedTask) {
-		var allTasks = switchState(updatedTask, this.state.allTasks);
+	updateTasks(allTasks) {
 		var tasks = clone(allTasks);
 		if (searchValue) {
 			tasks = filterTasks(searchValue, allTasks);
 		}
 		this.setState({tasks, allTasks});
+	}
+	handleStateChange(e, updatedTask) {
+		var allTasks = switchState(updatedTask, this.state.allTasks);
+		this.updateTasks(allTasks);
+		setTimeout(() => {
+			$(".task-body span.remaining").each(function(){
+				var $this = $(this);
+				var val = $(this).attr("data-value");
+				$this.find("input").val(val);
+			});
+		}, 100)
+	}
+
+	refreshTask(e, task) {
+		console.log("refresh task");
+		var allTasks = refreshTask(task, this.state.allTasks);
+		this.updateTasks(allTasks);
 	}
 
 	fetchData() {
@@ -55,12 +71,16 @@ class MyTasksPage extends React.Component {
 				this.setState({ tasks: newTasks, allTasks});
 			})		
 	}
-
+	bindEvents() {
+		$(document).on("state-change", this.handleStateChange.bind(this));
+		$(document).on("refresh-task", this.refreshTask.bind(this));
+	}
 	componentWillMount() {
 		// Ensure a project has been selected
 		if (!this.state.project || !this.state.project.name) {
 			window.location.href = "/projects"
 		}
+		//setTimeout(() => this.bindEvents, 10);
 		this.fetchData();
 	}
 
