@@ -22,19 +22,25 @@ var mapStates = function(workItem) {
 	else if (workItem.state === "Approved") workItem.state = "In Progress";
 }
 var getChildren = function(apiObj) {
-	var ids = apiObj.relations
+    var ids = [];
+    if (apiObj.relations) {
+       ids = apiObj.relations
 				.filter(r => r.rel === "System.LinkTypes.Hierarchy-Forward")
 				.map(r => {
 					return {
 						url: r.url,
 						id: r.url.substring(r.url.lastIndexOf("/") + 1)
 					};
-				});
+				}); 
+    }
+	
 	return ids;
 };
 
 var getParent = function(apiObj) {
-	var ids = apiObj.relations
+	var ids = [];
+    if (apiObj.relations) {
+        ids = apiObj.relations
 				.filter(r => r.rel === "System.LinkTypes.Hierarchy-Reverse")
 				.map(r => {
 					return {
@@ -42,6 +48,7 @@ var getParent = function(apiObj) {
 						id: r.url.substring(r.url.lastIndexOf("/") + 1)
 					};
 				});
+    }
 	return ids.length ? ids[0] : null;
 };
 module.exports = WorkItem;

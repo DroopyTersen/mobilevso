@@ -9,7 +9,7 @@ export default class TaskTabs extends React.Component {
 
 	render() {
 		return (
-		<div className="row">
+		<div className="row tasktabs">
 			<div className="col s12 card-panel">
 				<ul className="tabs">
 					<li className="tab col s3">

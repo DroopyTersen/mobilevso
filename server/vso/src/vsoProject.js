@@ -28,7 +28,8 @@ VsoProject.prototype._getOpenTasks = function(wiql) {
 					.filter(item => item.workItemType === "Task" || item.workItemType === "Bug")
 					.groupBy("state")
 					.value();	
-		});
+		})
+        .catch(error => console.log(error.stack));
 };
 
 VsoProject.prototype.openTasks = function(displayName) {

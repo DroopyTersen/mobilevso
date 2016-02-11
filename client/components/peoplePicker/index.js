@@ -33,7 +33,6 @@ export default class PeoplePicker extends React.Component {
 		if (settings.project && settings.project.id) {
 			projectsApi.getTeammates(settings.project)
 				.then(teammates => {
-					console.log(teammates.filter(u => u.displayName === "Sarah Otto"))
 					return this.setState({ teammates })
 				})
 				.then(this.initSelect2.bind(this))

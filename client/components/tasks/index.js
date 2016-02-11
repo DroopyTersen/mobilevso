@@ -69,15 +69,12 @@ export default class Tasks extends React.Component {
 		tasksApi.getOpenTasks(this.state.project.name, this.props.user)
 			.then(tasks => {
 				var allTasks = Object.assign({}, defaultTasks, tasks);
-				console.log("GOT OPEN TASKS")
-				console.log(allTasks);
 				this.setState({ tasks: filterTasks(searchValue, allTasks), allTasks })
 				return tasksApi.getRecentDone(this.state.project.name, this.props.user);
 			})
 			.then(tasks => {
 				var allTasks = Object.assign({}, this.state.tasks, tasks);
 				var tasks = filterTasks(searchValue, allTasks);
-				console.log("GOT DONE TASKS")
 				this.setState({ tasks, allTasks});
 			})		
 	}

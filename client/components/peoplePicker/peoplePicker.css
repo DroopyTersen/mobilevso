@@ -22,11 +22,19 @@
     font-size: 3rem;
     left: 0;
 }
+
 .peoplepicker i.material-icons.prefix.active {
   color:#fff;
 }
+input.select2-search__field {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+ul#select2-peoplepicker-results {
+    max-height: 130px;
+}
 span.select2-container.select2-container--default {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 span.select2-selection.select2-selection--single {
     height: 40px;
@@ -35,5 +43,13 @@ span.select2-selection.select2-selection--single {
 
 span#select2-peoplepicker-container {
     position: relative;
-    top: 6px;
+    top: 5px;
+    font-size: 1.2em
+}
+
+.waves-effect {
+  z-index: 0
+}
+.tasktabs.row {
+  margin-bottom: 65px;
 }
