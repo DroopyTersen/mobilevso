@@ -3,6 +3,10 @@ require("./taskTabs.css")
 import TasksList from '../tasksList'
 
 export default class TaskTabs extends React.Component {
+	componentDidUpdate() {
+		setTimeout(() => $('ul.tabs').tabs(), 25)
+	}
+
 	render() {
 		return (
 		<div className="row">

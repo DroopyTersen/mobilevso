@@ -1,6 +1,7 @@
 import React from 'react';
 require("./header.css")
 import { getSettings } from '../../data/settings'
+import { projectsApi } from '../../data/api'
 
 export default class Header extends React.Component {
 
@@ -8,6 +9,7 @@ export default class Header extends React.Component {
     	super(props);
 	}
 	componentDidMount() {
+
 		setTimeout(() => $(".button-collapse").sideNav(), 10);
 	}
 

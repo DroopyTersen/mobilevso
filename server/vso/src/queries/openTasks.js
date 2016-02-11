@@ -1,4 +1,5 @@
-module.exports = `
+module.exports = (displayName) => {
+	return  `
 SELECT 
 	[System.Id], [System.NodeName], [System.Title], 
 	[Microsoft.VSTS.Scheduling.RemainingWork], [System.State], 
@@ -25,10 +26,11 @@ WHERE
 			OR
 			Target.[System.WorkItemType] = 'Bug' 
 		)
-		AND Target.[System.AssignedTo] = @me
-		AND Target.[System.State] = 'Done' 
-		AND Target.[Microsoft.VSTS.Common.ClosedDate] > @today - 10
-	) 
+		AND Target.[System.AssignedTo] = '${displayName}' 
+		AND Target.[System.State] <> 'Done' 
+		AND Target.[System.State] <> 'Removed'
+	)
 
-ORDER BY [Microsoft.VSTS.Common.ClosedDate] desc mode(Recursive,ReturnMatchingChildren)
+ORDER BY [Microsoft.VSTS.Common.Priority], [System.State] mode(Recursive,ReturnMatchingChildren)
 `;
+}

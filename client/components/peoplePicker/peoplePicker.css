@@ -1,0 +1,39 @@
+.peoplepicker-footer{
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    margin-bottom: 0;
+    padding: 0;
+    background:#ee6e73;
+}
+.peoplepicker-footer .row {
+  margin-bottom: 15px;
+}
+.peoplepicker input {
+  background:#fff;
+    position: relative;
+    z-index: 99999;
+    display: inline-block;
+    font-size:1.2em;
+    padding:0 0 0 10px;
+}
+
+.peoplepicker i.material-icons.prefix {
+    font-size: 3rem;
+    left: 0;
+}
+.peoplepicker i.material-icons.prefix.active {
+  color:#fff;
+}
+span.select2-container.select2-container--default {
+    font-size: 1.3em;
+}
+span.select2-selection.select2-selection--single {
+    height: 40px;
+    font-weight: 300;
+}
+
+span#select2-peoplepicker-container {
+    position: relative;
+    top: 6px;
+}

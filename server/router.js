@@ -39,14 +39,16 @@ var createRoutes = function(app, passport) {
             .catch(err => res.send(err))
     });
 
-    app.get("/api/mytasks", authorize, (req, res) => {
-        api.getMyTasks(req.user, req.query.project)
+    app.get("/api/recentdone", authorize, (req, res) => {
+        var name = req.query.name ? decodeURIComponent(req.query.name) : "";
+        api.getRecentDone(req.user, req.query.project, name)
             .then(tasks => res.send(tasks) )
             .catch(err => res.send(err))
     });
 
-    app.get("/api/myrecentdone", authorize, (req, res) => {
-        api.getMyRecentDone(req.user, req.query.project)
+    app.get("/api/opentasks", authorize, (req, res) => {
+        var name = req.query.name ? decodeURIComponent(req.query.name) : "";
+        api.getOpenTasks(req.user, req.query.project, name)
             .then(tasks => res.send(tasks) )
             .catch(err => res.send(err))
     });
@@ -69,10 +71,12 @@ var createRoutes = function(app, passport) {
             .catch(err => res.send(err))
     });
     
-    app.get("/api/teammembers", authorize, (req, res) => {
+    app.get("/api/teammates", authorize, (req, res) => {
         var id = decodeURIComponent(req.query.projectId);
         var name = decodeURIComponent(req.query.projectName);
-        return api.getTeamMembers(req.user, { name, id });
+        api.getTeamMembers(req.user, { name, id })
+            .then(apiRes => res.send(apiRes))
+            .catch(err => res.send(err))
     })
 
     app.get("/api/burndown", authorize, (req, res) => {

@@ -21,14 +21,22 @@ VsoProject.prototype.query = function(wiqlStr) {
 		.then(data.workItems.setPath);
 };
 
-VsoProject.prototype.myOpenTasks = function() {
-	return this.query(queries.myOpenTasks)
+VsoProject.prototype._getOpenTasks = function(wiql) {
+	return this.query(wiql)
 		.then(workItems => {
 			return _.chain(workItems)
 					.filter(item => item.workItemType === "Task" || item.workItemType === "Bug")
 					.groupBy("state")
 					.value();	
 		});
+};
+
+VsoProject.prototype.openTasks = function(displayName) {
+	return this._getOpenTasks(queries.openTasks(displayName))
+};
+
+VsoProject.prototype.myOpenTasks = function() {
+	return this._getOpenTasks(queries.myOpenTasks)
 };
 
 VsoProject.prototype.teams = function() {
@@ -41,26 +49,41 @@ VsoProject.prototype.teams = function() {
 };
 
 VsoProject.prototype.getMainTeam = function() {
-    var url = this.idUrl + "/teams"
-    return this._ctx.getJSON(url).then(proj => proj.defaultTeam);
+    var url = this.idUrl //+ "/teams"
+    return this._ctx.getJSON(url).then(proj => {
+        return  proj.defaultTeam
+    });
 }
 VsoProject.prototype.teamMembers = function() {
-   this.getMainTeam().then(team => {
+   return this.getMainTeam().then(team => {
        var url = team.url + "/members?$top=1000"
-       return this._ctx.getJSON(url).then(data => data.value);
+       console.log(url);
+       return this._ctx.getJSON(url).then(data => { 
+            var users = data.value.filter(t => !t.isContainer)
+            users.sort((a,b) => a.displayName < b.displayName ? -1 : 1 )
+            return users;
+       });
    }) 
 }
-VsoProject.prototype.myRecentDone = function() {
-	return this.query(queries.myRecentDone)
-	.then(workItems => {
-		return _.chain(workItems)
-				.filter(item => item.workItemType === "Task")
-				.sortBy("closedDate")
-				.reverse()
-				.groupBy("state")
-				.value();	
-	});
-};
+
+VsoProject.prototype._getDoneTasks = function(wiql) {
+	return this.query(wiql)
+		.then(workItems => {
+			return _.chain(workItems)
+					.filter(item => item.workItemType === "Task")
+					.sortBy("closedDate")
+					.reverse()
+					.groupBy("state")
+					.value();	
+		});
+}
+
+VsoProject.prototype.myRecentDone = function() { 
+	return this._getDoneTasks(queries.myRecentDone) 
+}
+VsoProject.prototype.recentDone = function(displayName) {
+	return this._getDoneTasks(queries.recentDone(displayName))
+}
 
 VsoProject.prototype.getBurndown = function(cb) {
 	return this.currentIteration().then(iteration => {

@@ -18,25 +18,29 @@ api.setTaskRemaining = function(user, id, remaining) {
 	return vso.tasks(id).setRemaining(remaining)
 }
 
-api.getMyTasks = function(user, project) {
-	var vso = connectToVso(user)
-	var project = vso.projects(decodeURIComponent(project))
-	
-	return project.myOpenTasks();
-}; 
-
 api.getTeamMembers = function(user, proj) {
-   // return connectToVso(user).projects(proj).teamMembers();
+   var project = connectToVso(user).projects(proj)
+   return project.teamMembers();
 };
 api.getBurndown = function(user, proj, cb) {
     return connectToVso(user).projects(proj).getBurndown(cb);
 };
-api.getMyRecentDone = function(user, project) {
+
+api.getRecentDone = function(user, project, displayName) {
 	var vso = connectToVso(user)
 	var project = vso.projects(decodeURIComponent(project))
 	
-	return project.myRecentDone().then(tasks => tasks.length > 20 ? tasks.slice(0,19) : tasks);
-}; 
+	var request = displayName ? project.recentDone(displayName) : project.myRecentDone();
+	return request.then(tasks => tasks.length > 20 ? tasks.slice(0,19) : tasks);
+};
+
+api.getOpenTasks = function(user, project, displayName) {
+	var vso = connectToVso(user)
+	var project = vso.projects(decodeURIComponent(project))
+	
+	var request = displayName ? project.openTasks(displayName) : project.myOpenTasks();
+	return request.then(tasks => tasks.length > 20 ? tasks.slice(0,19) : tasks);
+};
 
 api.getProjects = (user) => connectToVso(user).projects()
 

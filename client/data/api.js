@@ -29,8 +29,8 @@ projectsApi.getTeammates = (proj) => {
 
 var tasksApi = {};
 
-tasksApi.getMyTasks = (proj) => _getJSON("/api/myTasks?project=" + proj)
-tasksApi.getMyRecentDone = (proj) => $.getJSON("/api/myrecentdone?project=" + proj)
+tasksApi.getOpenTasks = (proj, user = "") => _getJSON(`/api/opentasks?project=${proj}&name=${user}`)
+tasksApi.getRecentDone = (proj, user = "") => $.getJSON(`/api/recentdone?project=${proj}&name=${user}`)
 
 tasksApi.setState = function(task, state) {
 	if (task.workItemType === "Bug" && state === "In Progress") state = "Committed";
