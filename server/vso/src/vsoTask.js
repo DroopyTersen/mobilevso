@@ -1,5 +1,5 @@
 var WorkItem = require("./workItem");
-var VsoProject = require("./VsoProject");
+var VsoProject = require("./vsoProject");
 var VsoTask = function(ctx, id) {
 	this._ctx = ctx;
 	this.id = id;

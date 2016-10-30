@@ -25,6 +25,9 @@ export default class PeoplePicker extends React.Component {
 		})
 		$("#peoplepicker").on("change", this.handlePersonChange.bind(this));
 		loading.stop();
+		if (this.props.openByDefault) {
+			
+		}
 	}
 
 	componentDidMount() {
