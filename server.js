@@ -6,9 +6,9 @@ var bodyParser   	= require('body-parser');
 var session      	= require('express-session');
 var passport 		= require('passport');
 
-var config 			= require('../webpack.config.prod');
-var createRoutes 	= require("./router").createRoutes;
-var setupPassport 	= require("./passport").setupPassport;
+var config 			= require('./webpack.config.prod');
+var createRoutes 	= require("./server/router").createRoutes;
+var setupPassport 	= require("./server/passport").setupPassport;
 
 var app 		= express();
 var compiler 	= webpack(config);
@@ -25,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 createRoutes(app, passport);
-app.use('/static', express.static('dist'));
+app.use("/static", express.static('dist'));
 
 
 app.listen(port, host, function(err) {
